@@ -47,10 +47,14 @@ export const errorHandler: ErrorRequestHandler = (err, req, res, _next) => {
     logger.error({ code: error.code, url: req.originalUrl }, error.message);
   }
 
+  // Admins see the underlying cause of unexpected errors, so production issues can be read from the browser.
+  const detail = error.code === 'INTERNAL_ERROR' && req.user?.role === 'admin' && err instanceof Error ? err.message : undefined;
+
   res.status(error.status).json({
     success: false,
     message: error.message,
     code: error.code,
     ...(error.errors ? { errors: error.errors } : {}),
+    ...(detail ? { detail } : {}),
   });
 };

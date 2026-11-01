@@ -25,6 +25,10 @@ function loadSanitizer() {
     };
     return (html: string) => sanitize(html, options).trim();
   });
+  // Don't keep a failed load cached, or every later save on this instance would fail too.
+  sanitizer.catch(() => {
+    sanitizer = null;
+  });
   return sanitizer;
 }
 

@@ -29,6 +29,10 @@ function loadStorage(): Promise<Storage> {
       responseChecksumValidation: 'WHEN_REQUIRED',
     }),
   }));
+  // A failed load must not stay cached for the life of the instance.
+  storage.catch(() => {
+    storage = null;
+  });
   return storage;
 }
 

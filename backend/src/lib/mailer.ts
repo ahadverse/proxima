@@ -15,6 +15,10 @@ function getTransporter(): Promise<Transporter> | null {
       auth: { user: env.SMTP_USER, pass: env.SMTP_PASS },
     }),
   );
+  // A failed load must not stay cached for the life of the instance.
+  transporter.catch(() => {
+    transporter = null;
+  });
   return transporter;
 }
 
