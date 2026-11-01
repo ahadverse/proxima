@@ -74,7 +74,7 @@ PayStation sandbox credentials are in `backend/.env`. `PAYSTATION_CALLBACK_URL` 
 
 ## Deploying to Vercel
 
-Each folder is its own Vercel project, with its settings in `vercel.json` (`vercel.ts` for admin). Create three projects from the repository and set each one's **Root Directory**:
+Each folder is its own Vercel project, with its settings in its `vercel.json`. Create three projects from the repository and set each one's **Root Directory**:
 
 | Project | Root Directory | Runs as |
 |---|---|---|
@@ -104,11 +104,11 @@ pnpm 11 is pinned in each project's install command, so no extra Vercel setting 
 
 The API must be live while the storefront builds.
 
-**4. Admin environment variables:**
+**4. Admin:** the API address is the `/api/:path*` rewrite in `admin/vercel.json`. If the API moves to another domain, change it there. Environment variables:
 
-- `API_URL`: the API domain. `vercel.ts` reads it at build time to proxy `/api/*`.
 - `VITE_STOREFRONT_URL`
 - `VITE_API_URL`: leave unset, so calls stay on the admin domain.
+- `VITE_API_PROXY`: not needed on Vercel; it is only for local development.
 
 **5. One-time setup** from your machine, with `backend/.env` pointing at the production database and buckets:
 
@@ -131,7 +131,7 @@ pnpm r2:cors      # allows zip uploads from the production ADMIN_URL
 |---|---|
 | backend | `pnpm build` then `pnpm start` (runs `dist/server.js`) |
 | frontend | `pnpm build` then `pnpm start` (the API must be running during the build) |
-| admin | `pnpm build`, then serve `admin/dist` as a static site with SPA fallback to `index.html`. Proxy `/api/*` to the API on the same domain, as `vercel.ts` does |
+| admin | `pnpm build`, then serve `admin/dist` as a static site with SPA fallback to `index.html`. Proxy `/api/*` to the API on the same domain, as `admin/vercel.json` does |
 
 ## Shared code
 
