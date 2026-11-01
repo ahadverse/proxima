@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, useConfirm } from '@/components/ui/dialog';
 import { Field, Input, Switch } from '@/components/ui/form';
 import { Badge, EmptyState, PageHeader, Skeleton } from '@/components/ui/misc';
-import { ApiError, api, errorMessage, fieldMessage } from '@/lib/api';
+import { api, applyServerErrors, errorMessage, fieldMessage } from '@/lib/api';
 import { cn } from '@/lib/utils';
 
 function CategoryDialog({ open, onOpenChange, category }: { open: boolean; onOpenChange: (open: boolean) => void; category: CategoryDTO | null }) {
@@ -40,10 +40,7 @@ function CategoryDialog({ open, onOpenChange, category }: { open: boolean; onOpe
       queryClient.invalidateQueries({ queryKey: ['admin', 'categories'] });
       onOpenChange(false);
     },
-    onError: (error) => {
-      if (error instanceof ApiError && error.errors) error.errors.forEach((e) => setError(e.path as never, { message: e.message }));
-      else toast.error(errorMessage(error));
-    },
+    onError: (error) => toast.error(applyServerErrors(error, setError)),
   });
 
   return (

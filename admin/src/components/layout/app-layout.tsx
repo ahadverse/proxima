@@ -41,7 +41,7 @@ const NAV: { label: string; items: NavItem[] }[] = [
   {
     label: 'Catalog',
     items: [
-      { to: '/products', label: 'Products', icon: Package },
+      { to: '/products', label: 'Themes', icon: Package },
       { to: '/categories', label: 'Categories', icon: FolderTree },
     ],
   },

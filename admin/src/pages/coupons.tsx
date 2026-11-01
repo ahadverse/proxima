@@ -12,7 +12,7 @@ import { Dialog, useConfirm } from '@/components/ui/dialog';
 import { Field, Input, Select, Switch } from '@/components/ui/form';
 import { Badge, PageHeader } from '@/components/ui/misc';
 import { useDebounce } from '@/hooks/use-debounce';
-import { ApiError, api, errorMessage, fieldMessage, toQuery } from '@/lib/api';
+import { api, applyServerErrors, errorMessage, fieldMessage, toQuery } from '@/lib/api';
 import { formatDate, formatPrice, fromLocalInput, toLocalInput } from '@/lib/utils';
 
 const EMPTY: CouponInput = {
@@ -76,10 +76,7 @@ function CouponDialog({ open, onOpenChange, coupon }: { open: boolean; onOpenCha
       queryClient.invalidateQueries({ queryKey: ['admin', 'coupons'] });
       onOpenChange(false);
     },
-    onError: (error) => {
-      if (error instanceof ApiError && error.errors) error.errors.forEach((e) => setError(e.path as never, { message: e.message }));
-      else toast.error(errorMessage(error));
-    },
+    onError: (error) => toast.error(applyServerErrors(error, setError)),
   });
 
   return (

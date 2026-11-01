@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { useConfirm } from '@/components/ui/dialog';
 import { Field, Input, Switch } from '@/components/ui/form';
 import { Card, Skeleton } from '@/components/ui/misc';
-import { ApiError, api, errorMessage, fieldMessage } from '@/lib/api';
+import { api, applyServerErrors, errorMessage, fieldMessage } from '@/lib/api';
 
 const EMPTY: PageInput = { slug: '', title: { en: '', bn: '' }, content: { en: '', bn: '' }, isPublished: true };
 
@@ -48,10 +48,7 @@ export default function PageEditorPage() {
       reset({ slug: data.slug, title: data.title, content: data.content, isPublished: data.isPublished });
       if (isNew) navigate(`/pages/${data._id}`, { replace: true });
     },
-    onError: (error) => {
-      if (error instanceof ApiError && error.errors) error.errors.forEach((e) => setError(e.path as never, { message: e.message }));
-      else toast.error(errorMessage(error));
-    },
+    onError: (error) => toast.error(applyServerErrors(error, setError)),
   });
 
   const remove = useMutation({

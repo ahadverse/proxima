@@ -1,3 +1,4 @@
+import type { FieldValues, Path, UseFormSetError } from 'react-hook-form';
 import type { ApiFieldError, PaginationMeta } from '@/shared';
 
 export class ApiError extends Error {
@@ -71,6 +72,16 @@ export const api = {
 export function errorMessage(error: unknown): string {
   if (error instanceof ApiError) return error.message;
   return 'Something went wrong';
+}
+
+/**
+ * Shows server-side field errors on the form, focusing (and scrolling to) the first one, and
+ * returns the text for a toast. Specific errors such as a duplicate slug keep the server's message.
+ */
+export function applyServerErrors<T extends FieldValues>(error: unknown, setError: UseFormSetError<T>): string {
+  if (!(error instanceof ApiError) || !error.errors?.length) return errorMessage(error);
+  error.errors.forEach((item, index) => setError(item.path as Path<T>, { message: item.message }, { shouldFocus: index === 0 }));
+  return error.code === 'VALIDATION_ERROR' ? 'Please fix the highlighted fields' : error.message;
 }
 
 export function toQuery(params: Record<string, string | number | boolean | undefined | null>): string {

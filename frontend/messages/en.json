@@ -23,6 +23,7 @@
     "inCart": "In cart",
     "viewCart": "View cart",
     "views": "{count} views",
+    "sold": "{count} sold",
     "loading": "Loading…",
     "retry": "Try again",
     "close": "Close",
@@ -104,7 +105,7 @@
   "product": {
     "home": "Home",
     "allProducts": "All products",
-    "tutorial": "Tutorial",
+    "adminDemo": "Admin Demo",
     "liveDemo": "Live Demo",
     "buyNow": "Buy Now",
     "getFree": "Get it free",

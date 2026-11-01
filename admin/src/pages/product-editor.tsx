@@ -22,7 +22,7 @@ import { Button } from '@/components/ui/button';
 import { useConfirm } from '@/components/ui/dialog';
 import { Field, Input, Select, Switch, Textarea } from '@/components/ui/form';
 import { Badge, Card, Skeleton } from '@/components/ui/misc';
-import { ApiError, api, errorMessage, fieldMessage } from '@/lib/api';
+import { api, applyServerErrors, errorMessage, fieldMessage } from '@/lib/api';
 import { STOREFRONT_URL } from '@/lib/utils';
 
 const emptyLocalized = () => ({ en: '', bn: '' });
@@ -204,14 +204,7 @@ export default function ProductEditorPage() {
       reset(toInput(data));
       if (isNew) navigate(`/products/${data._id}`, { replace: true });
     },
-    onError: (error) => {
-      if (error instanceof ApiError && error.errors?.length) {
-        for (const item of error.errors) setError(item.path as never, { message: item.message });
-        toast.error('Please fix the highlighted fields');
-      } else {
-        toast.error(errorMessage(error));
-      }
-    },
+    onError: (error) => toast.error(applyServerErrors(error, setError)),
   });
 
   const remove = useMutation({

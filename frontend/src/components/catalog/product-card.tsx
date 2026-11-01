@@ -1,5 +1,5 @@
 import { useLocale, useTranslations } from 'next-intl';
-import { Eye } from 'lucide-react';
+import { Eye, ShoppingBag } from 'lucide-react';
 import { pickLocalized, type Locale, type ProductCardDTO } from '@/shared';
 import { ProductImage } from '@/components/ui/product-image';
 import { Link } from '@/i18n/navigation';
@@ -82,9 +82,15 @@ export function ProductCard({ product, eager = false }: { product: ProductCardDT
 
         <div className="mt-auto flex items-end justify-between gap-3 pt-4">
           <div className="min-w-0">
-            <p className="mb-1 flex items-center gap-1 text-[11.5px] text-muted">
-              <Eye className="size-3.5" />
-              {t('views', { count: formatCompact(product.views, locale) })}
+            <p className="mb-1 flex items-center gap-2.5 text-[11.5px] text-muted">
+              <span className="flex items-center gap-1">
+                <Eye className="size-3.5" />
+                {t('views', { count: formatCompact(product.views, locale) })}
+              </span>
+              <span className="flex items-center gap-1">
+                <ShoppingBag className="size-3.5" />
+                {t('sold', { count: formatCompact(product.sales, locale) })}
+              </span>
             </p>
             <RatingStars value={product.ratingCount ? product.ratingAvg : 5} />
           </div>

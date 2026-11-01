@@ -23,6 +23,7 @@
     "inCart": "কার্টে আছে",
     "viewCart": "কার্ট দেখুন",
     "views": "{count} ভিউ",
+    "sold": "{count} বিক্রি",
     "loading": "লোড হচ্ছে…",
     "retry": "আবার চেষ্টা করুন",
     "close": "বন্ধ করুন",
@@ -104,7 +105,7 @@
   "product": {
     "home": "হোম",
     "allProducts": "সব প্রোডাক্ট",
-    "tutorial": "টিউটোরিয়াল",
+    "adminDemo": "অ্যাডমিন ডেমো",
     "liveDemo": "লাইভ ডেমো",
     "buyNow": "এখনই কিনুন",
     "getFree": "ফ্রি নিন",

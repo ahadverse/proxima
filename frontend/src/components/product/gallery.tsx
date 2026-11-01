@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { ExternalLink, Expand, PlayCircle } from 'lucide-react';
+import { ExternalLink, Expand, LayoutDashboard } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { ProductImage } from '@/components/ui/product-image';
 import { cn } from '@/lib/utils';
@@ -11,10 +11,11 @@ interface GalleryProps {
   title: string;
   images: string[];
   previewUrl: string;
-  hasTutorial: boolean;
+  /** Public demo admin panel; empty when the product doesn't share one. */
+  adminDemoUrl: string;
 }
 
-export function ProductGallery({ title, images, previewUrl, hasTutorial }: GalleryProps) {
+export function ProductGallery({ title, images, previewUrl, adminDemoUrl }: GalleryProps) {
   const t = useTranslations('product');
   const tc = useTranslations('common');
   const [index, setIndex] = useState(0);
@@ -71,15 +72,17 @@ export function ProductGallery({ title, images, previewUrl, hasTutorial }: Galle
 
       <div className="mt-3 grid grid-cols-2 gap-3">
         <a
-          href={hasTutorial ? '#tutorial' : undefined}
-          aria-disabled={!hasTutorial}
+          href={adminDemoUrl || undefined}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-disabled={!adminDemoUrl}
           className={cn(
             'flex h-12 items-center justify-center gap-2 rounded-xl border border-brand-200 bg-white text-sm font-bold text-brand-700 transition hover:bg-brand-50',
-            !hasTutorial && 'pointer-events-none opacity-50',
+            !adminDemoUrl && 'pointer-events-none opacity-50',
           )}
         >
-          <PlayCircle className="size-4" />
-          {t('tutorial')}
+          <LayoutDashboard className="size-4" />
+          {t('adminDemo')}
         </a>
         <a
           href={previewUrl || undefined}

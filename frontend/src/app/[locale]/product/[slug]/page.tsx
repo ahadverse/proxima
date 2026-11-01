@@ -201,7 +201,7 @@ export default async function ProductPage({ params }: PageProps) {
         </nav>
 
         <div className="mt-5 grid gap-6 lg:grid-cols-[1.45fr_1fr] lg:items-start">
-          <ProductGallery title={title} images={images} previewUrl={product.previewUrl} hasTutorial={Boolean(videoId)} />
+          <ProductGallery title={title} images={images} previewUrl={product.previewUrl} adminDemoUrl={product.demoAdmin?.url ?? ''} />
           <div className="lg:sticky lg:top-24">
             <PurchaseCard product={product} offer={settings.offerBar} />
           </div>

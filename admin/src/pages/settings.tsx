@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Field, Input, Select, Switch } from '@/components/ui/form';
 import { Card, PageHeader, Skeleton } from '@/components/ui/misc';
 import { Tabs, TabsContent, TabsList } from '@/components/ui/tabs';
-import { ApiError, api, errorMessage, fieldMessage } from '@/lib/api';
+import { api, applyServerErrors, fieldMessage } from '@/lib/api';
 import { fromLocalInput, toLocalInput } from '@/lib/utils';
 
 const TABS = [
@@ -54,12 +54,7 @@ export default function SettingsPage() {
       queryClient.setQueryData(['admin', 'settings'], saved);
       reset(strip(saved));
     },
-    onError: (error) => {
-      if (error instanceof ApiError && error.errors) {
-        error.errors.forEach((e) => setError(e.path as never, { message: e.message }));
-        toast.error('Please fix the highlighted fields');
-      } else toast.error(errorMessage(error));
-    },
+    onError: (error) => toast.error(applyServerErrors(error, setError)),
   });
 
   if (isLoading || !data) {
