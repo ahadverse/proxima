@@ -1,0 +1,8 @@
+allowBuilds:
+  sharp: true
+  '@tailwindcss/oxide': true
+  unrs-resolver: true
+  '@parcel/watcher': false
+  '@swc/core': false
+minimumReleaseAgeExclude:
+  - lucide-react@1.66.0

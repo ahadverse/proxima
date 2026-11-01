@@ -1,0 +1,55 @@
+{
+  "name": "@proxima/backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --clear-screen=false src/server.ts",
+    "build": "tsup",
+    "start": "node dist/server.js",
+    "seed": "tsx src/scripts/seed.ts",
+    "r2:cors": "tsx src/scripts/r2-cors.ts",
+    "db:indexes": "tsx src/scripts/db-indexes.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1161.0",
+    "@aws-sdk/s3-request-presigner": "^3.1161.0",
+    "@vercel/functions": "^3.10.5",
+    "argon2": "^0.45.1",
+    "busboy": "^1.6.0",
+    "compression": "^1.8.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.2",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.24.7",
+    "nanoid": "^6.0.2",
+    "nodemailer": "^10.3.1",
+    "pino": "^10.4.0",
+    "sanitize-html": "^2.18.1",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/busboy": "^1.5.5",
+    "@types/compression": "^1.8.1",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.0.0",
+    "@types/nodemailer": "^8.0.2",
+    "@types/sanitize-html": "^2.16.0",
+    "pino-pretty": "^13.2.0",
+    "tsup": "8.5.1",
+    "tsx": "^4.23.15",
+    "typescript": "5.9.3"
+  },
+  "packageManager": "pnpm@11.15.1",
+  "engines": {
+    "node": ">=20.9"
+  }
+}
