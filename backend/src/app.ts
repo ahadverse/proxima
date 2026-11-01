@@ -10,6 +10,7 @@ import { errorHandler, notFound } from './middlewares/error';
 import { apiLimiter } from './middlewares/rateLimit';
 import { sanitizeBody } from './middlewares/sanitize';
 import { routes } from './routes';
+import { ok } from './utils/response';
 
 /**
  * The Express app, exported as the default so Vercel can run it as a function.
@@ -43,6 +44,11 @@ if (!isProduction) {
     next();
   });
 }
+
+// Quick "is it up" check for the bare domain; needs no database.
+app.get('/', (_req, res) => {
+  ok(res, { status: 'running', health: '/api/v1/health' }, undefined, 'Proxima API is running');
+});
 
 app.use('/api/v1', apiLimiter, ensureDatabase, routes);
 app.use(notFound);
