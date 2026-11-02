@@ -46,7 +46,7 @@ export function SortMenu({ value }: { value: SortOption }) {
           className="z-40 min-w-56 rounded-2xl border border-line bg-white p-1.5 shadow-[0_24px_60px_-20px_rgb(34_10_61/0.35)] data-[state=open]:animate-[fade-up_0.18s_ease-out]"
         >
           <DropdownMenu.RadioGroup value={value} onValueChange={(next) => select(next as SortOption)}>
-            {SORT_OPTIONS.map((option) => (
+            {SORT_OPTIONS.filter((option) => option !== 'latest').map((option) => (
               <DropdownMenu.RadioItem
                 key={option}
                 value={option}

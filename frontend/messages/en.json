@@ -85,7 +85,8 @@
     "allProducts": "All products",
     "sortBy": "Sort by",
     "sort": {
-      "default": "Featured",
+      "default": "Latest",
+      "featured": "Featured",
       "popular": "Most popular",
       "latest": "Latest",
       "price-asc": "Price: low to high",

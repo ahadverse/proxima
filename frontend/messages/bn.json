@@ -85,7 +85,8 @@
     "allProducts": "সব প্রোডাক্ট",
     "sortBy": "সাজান",
     "sort": {
-      "default": "ফিচার্ড",
+      "default": "নতুন",
+      "featured": "ফিচার্ড",
       "popular": "সবচেয়ে জনপ্রিয়",
       "latest": "নতুন",
       "price-asc": "দাম: কম থেকে বেশি",

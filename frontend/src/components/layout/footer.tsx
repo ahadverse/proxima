@@ -1,11 +1,12 @@
 import Image from 'next/image';
-import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { pickLocalized, type Locale, type SiteSettingsDTO } from '@/shared';
 import { Link } from '@/i18n/navigation';
 import { whatsappLink } from '@/lib/utils';
 import { FacebookIcon, InstagramIcon, LinkedinIcon, TiktokIcon, WhatsappIcon, YoutubeIcon } from './brand-icons';
 import { Logo } from './logo';
+import { PaymentLogos } from './payment-logos';
 
 export async function Footer({ settings }: { settings: SiteSettingsDTO }) {
   const locale = (await getLocale()) as Locale;
@@ -125,10 +126,7 @@ export async function Footer({ settings }: { settings: SiteSettingsDTO }) {
                 <Image src={settings.paymentLogos} alt={t('securePayments')} width={420} height={120} className="h-auto w-full" unoptimized />
               </div>
             ) : (
-              <div className="flex items-center gap-3 rounded-xl border border-line bg-white p-4 text-sm font-medium text-ink-soft shadow-sm">
-                <ShieldCheck className="size-5 shrink-0 text-emerald-600" />
-                {t('payments')}
-              </div>
+              <PaymentLogos label={t('payments')} />
             )}
           </div>
         </div>
