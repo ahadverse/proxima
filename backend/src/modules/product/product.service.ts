@@ -19,7 +19,8 @@ import {
 import type { AdminProductListQuery } from './product.validation';
 
 const PUBLIC_SORTS: Record<SortOption, Record<string, SortOrder>> = {
-  default: { featured: -1, order: 1, createdAt: -1 },
+  default: { createdAt: -1 },
+  featured: { featured: -1, order: 1, createdAt: -1 },
   popular: { sales: -1, views: -1, createdAt: -1 },
   latest: { createdAt: -1 },
   'price-asc': { price: 1, createdAt: -1 },

@@ -39,7 +39,8 @@ export type CouponScope = (typeof COUPON_SCOPES)[number];
 export const RATING_STATUSES = ['approved', 'hidden'] as const;
 export type RatingStatus = (typeof RATING_STATUSES)[number];
 
-export const SORT_OPTIONS = ['default', 'popular', 'latest', 'price-asc', 'price-desc'] as const;
+// 'default' is newest first. 'featured' is the hand-picked order (featured, then the admin's manual order). 'latest' is kept as an alias of 'default' so older links keep working.
+export const SORT_OPTIONS = ['default', 'featured', 'popular', 'latest', 'price-asc', 'price-desc'] as const;
 export type SortOption = (typeof SORT_OPTIONS)[number];
 
 export const OFFER_MODES = ['fixed', 'evergreen-daily'] as const;
