@@ -200,7 +200,9 @@ export default async function ProductPage({ params }: PageProps) {
           <span className="line-clamp-1 font-medium text-ink-soft">{title}</span>
         </nav>
 
-        <div className="mt-5 grid gap-6 lg:grid-cols-[1.45fr_1fr] lg:items-start">
+        {/* grid-cols-1 (a bounded `minmax(0, 1fr)` track): without it the phone layout is one auto-sized column, which grows to
+            the gallery's thumbnail strip (4 thumbnails > the screen) and pushes the whole page wider than the screen. */}
+        <div className="mt-5 grid grid-cols-1 gap-6 lg:grid-cols-[1.45fr_1fr] lg:items-start">
           <ProductGallery title={title} images={images} previewUrl={product.previewUrl} adminDemoUrl={product.demoAdmin?.url ?? ''} />
           <div className="lg:sticky lg:top-24">
             <PurchaseCard product={product} offer={settings.offerBar} />
