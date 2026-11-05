@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node init && tsx watch --clear-screen=false src/server.ts",
-    "build": "node init && tsup",
-    "start": "node init && node dist/server.js",
+    "dev": "tsx watch --clear-screen=false src/server.ts",
+    "build": "tsup",
+    "start": "node dist/server.js",
     "seed": "tsx src/scripts/seed.ts",
     "r2:cors": "tsx src/scripts/r2-cors.ts",
     "db:indexes": "tsx src/scripts/db-indexes.ts",
